@@ -20,7 +20,7 @@
         <th scope="row">{{$product->id}}</th>
         <td>{{$product->title}}</td>
         <td>{{$product->price}}</td>
-        <td>{{$product->category_id}}</td>
+        <td>{{$product->category->name}}</td>
         </tr>
         @endforeach
     </tbody>
