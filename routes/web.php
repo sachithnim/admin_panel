@@ -14,3 +14,5 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [ProductController::class, 'index'])->name('dashboard');
 });
+
+Route::get('/add-product', [ProductController::class, 'create'])->name('add-product');

@@ -4,9 +4,10 @@
 
 <x-app-layout>
     <div class="container">
-    <table class="table caption-top">
-    <caption>List of products</caption>
-    <thead>
+    <h3 class="mb-4 mt-4 font-extrabold">List of products</h3>
+    <a class="btn btn-primary float-right mb-4" href="{{ url('/add-product') }}"> Add Product</a>
+    <table class="table">
+    <thead class="table-dark">
         <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
