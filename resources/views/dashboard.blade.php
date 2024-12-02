@@ -1,18 +1,32 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-   
-    <h3 class="font-bold text-xl text-gray-800 dark:text-gray-200 leading-tight">Products</h3>
-    @foreach ($products as $product)
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
 
-        <p>{{ $product->id }}</p>
-        <p>{{ $product->title }}</p>
-        <p>{{ $product->price }}</p>
+<x-app-layout>
+    <div class="container">
+    <table class="table caption-top">
+    <caption>List of products</caption>
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($products as $product)
+        <tr>
+        <th scope="row">{{$product->id}}</th>
+        <td>{{$product->title}}</td>
+        <td>{{$product->price}}</td>
+        <td>{{$product->category_id}}</td>
+        </tr>
+        @endforeach
+    </tbody>
+    </table>
+    </div>
         
-    @endforeach
 </x-app-layout> 
 
 
