@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Models\Category;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +20,10 @@ Route::middleware([
 Route::get('/add-product', [ProductController::class, 'create'])->name('add-product');
 
 Route::post('/add-product', [ProductController::class, 'store'])->name('store-product');
+
+
+Route::get('/category', [CategoryController::class, 'index'])->name('category');
+
+Route::get('/add-category', [CategoryController::class, 'create'])->name('add-category');
+
+Route::post('/add-category', [CategoryController::class, 'store'])->name('store-category');
