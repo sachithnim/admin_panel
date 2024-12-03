@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('price');
-            $table->integer('category_id');
+            $table->unsignedBigInteger('category_id')->nullable(); // Allow NULL
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null'); // Set NULL on delete
             $table->timestamps();
         });
+        
     }
 
     /**
