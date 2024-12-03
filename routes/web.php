@@ -16,3 +16,5 @@ Route::middleware([
 });
 
 Route::get('/add-product', [ProductController::class, 'create'])->name('add-product');
+
+Route::post('/add-product', [ProductController::class, 'store'])->name('store-product');

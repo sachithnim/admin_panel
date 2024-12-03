@@ -19,4 +19,12 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('products.create', compact('categories'));
     }
+
+    public function store(Request $request){
+
+        $input = $request->all();
+
+        Product::create($input);
+        return redirect('/dashboard');
+    }
 }

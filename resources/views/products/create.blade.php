@@ -3,29 +3,30 @@
 </head>
 
 <div class="container">
-<form>
-    <fieldset disabled>
+<form method="post" action="{{ url('/add-product') }}">
+    @csrf
       <legend>Add Product</legend>
+      
       <div class="mb-3">
-        <label for="disabledTextInput" class="form-label">Title</label>
-        <input type="text" class="form-control" placeholder="Title">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input type="text" name="title" class="form-control" placeholder="Title">
       </div>
 
       <div class="mb-3">
-        <label for="disabledTextInput" class="form-label">Price</label>
-        <input type="number" class="form-control" placeholder="Price">
+        <label for="exampleFormControlInput1" class="form-label">Price</label>
+        <input type="number" name="price" class="form-control" placeholder="Price">
       </div>
       
       <div class="mb-3">
-        <label for="disabledSelect" class="form-label">Disabled select menu</label>
-        <select id="disabledSelect" class="form-select">
+        <label for="exampleFormControlInput1" class="form-label">Category</label>
+        <select name="category_id" id="disabledSelect" class="form-select">
         @foreach ($categories as $category)
-          <option value="">{{ $category->name }}</option>
+          <option value="{{ $category->id }}">{{ $category->name }}</option>
         @endforeach
         </select>
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>
-    </fieldset>
+   
   </form>
 </div>
