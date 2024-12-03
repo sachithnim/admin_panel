@@ -38,7 +38,7 @@ class ProductController extends Controller
     public function update(Request $request, $product)
     {
         $input = $request->all();
-        
+
         $product = Product::find($product);
         $product->title = $input['title'];
         $product->price = $input['price'];
@@ -46,5 +46,12 @@ class ProductController extends Controller
 
         $product->save();
         return redirect('/dashboard');
+    }
+
+    public function destroy($product)
+    {
+        $product = Product::find($product);
+        $product->delete();
+        return redirect()->back();
     }
 }
