@@ -22,8 +22,11 @@
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Category</label>
         <select name="category_id" id="disabledSelect" class="form-select">
-        @foreach ($categories as $category)
-          <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @foreach ($categories as $category)
+            <option value="{{ $category->id }}" 
+                {{ $category->id == $product->category_id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
         @endforeach
         </select>
       </div>
