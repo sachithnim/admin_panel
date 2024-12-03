@@ -13,6 +13,7 @@
         <th scope="col">Title</th>
         <th scope="col">Price</th>
         <th scope="col">Category</th>
+        <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@
         <td>{{$product->title}}</td>
         <td>{{$product->price}}</td>
         <td>{{$product->category->name}}</td>
+        <td><a href="{{ url('/edit-product/'.$product->id) }}" class="btn btn-primary">Edit</a></td>
         </tr>
         @endforeach
     </tbody>

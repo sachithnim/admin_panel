@@ -27,4 +27,24 @@ class ProductController extends Controller
         Product::create($input);
         return redirect('/dashboard');
     }
+
+    public function edit($product)
+    {
+        $categories = Category::all();
+        $product = Product::find($product);
+        return view('products.edit', compact('product', 'categories'));
+    }
+
+    public function update(Request $request, $product)
+    {
+        $input = $request->all();
+        
+        $product = Product::find($product);
+        $product->title = $input['title'];
+        $product->price = $input['price'];
+        $product->category_id = $input['category_id'];
+
+        $product->save();
+        return redirect('/dashboard');
+    }
 }

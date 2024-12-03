@@ -18,8 +18,9 @@ Route::middleware([
 });
 
 Route::get('/add-product', [ProductController::class, 'create'])->name('add-product');
-
 Route::post('/add-product', [ProductController::class, 'store'])->name('store-product');
+Route::get('/edit-product/{product}', [ProductController::class, 'edit'])->name('edit-product');
+Route::put('/edit-product/{product}', [ProductController::class, 'update'])->name('update-product');
 
 
 Route::get('/category', [CategoryController::class, 'index'])->name('category');
