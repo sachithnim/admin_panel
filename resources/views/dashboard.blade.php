@@ -3,7 +3,7 @@
 <x-app-layout>
     <div class="container">
     <h3 class="mb-4 mt-4 font-extrabold">List of products</h3>
-    <a class="btn btn-primary float-right mb-4" href="{{ url('/add-product') }}"> Add Product</a>
+    <a class="btn btn-info float-end mb-4" href="{{ url('/add-product') }}"> Add Product</a>
     <table class="table">
     <thead class="table-dark">
         <tr>

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 <div class="container">
+<a class="btn btn-info float-end mb-4 mt-4" href="{{ url('/dashboard') }}"> Go Back</a>
 <form method="post" action="{{ url('/edit-product/'.$product->id) }}">
     @csrf
     @method('PUT')
