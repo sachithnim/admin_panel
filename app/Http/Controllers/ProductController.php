@@ -22,6 +22,12 @@ class ProductController extends Controller
 
     public function store(Request $request){
 
+        $request->validate([
+            'title' => 'required|string|min:3|max:50',
+            'price' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+        ],);
+
         $input = $request->all();
 
         Product::create($input);
@@ -37,6 +43,13 @@ class ProductController extends Controller
 
     public function update(Request $request, $product)
     {
+
+        $request->validate([
+            'title' => 'required|string|min:3|max:50',
+            'price' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
         $input = $request->all();
 
         $product = Product::find($product);

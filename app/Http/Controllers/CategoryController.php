@@ -21,6 +21,10 @@ class CategoryController extends Controller
 
     public function store(Request $request){
 
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name',
+        ]);
+
         $input = $request->all();
 
         Category::create($input);
@@ -35,6 +39,11 @@ class CategoryController extends Controller
 
     public function update(Request $request, $category)
     {
+
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name',
+        ]);
+
         $input = $request->all();
 
         $category = Category::find($category);
