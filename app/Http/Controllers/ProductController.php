@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProductController extends Controller
@@ -29,9 +30,19 @@ class ProductController extends Controller
             'title' => 'required|string|min:3|max:50',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
-        ],);
+        ]);
 
         $input = $request->all();
+        if ($request->hasFile('image'))
+        {
+            $destinationPath = 'public/images/products';
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            $path = $request->file('image')->storeAs($destinationPath, $image_name);
+
+            $input['image'] = $image_name;
+
+        }
         
         Product::create($input);
         session()->flash('message', $input['title'] . ' product successfully saved');

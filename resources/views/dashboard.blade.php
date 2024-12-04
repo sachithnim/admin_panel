@@ -10,7 +10,10 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col">SKU</th>
         <th scope="col">Category</th>
+        <th scope="col">Image</th>
         <th scope="col">Action</th>
         </tr>
     </thead>
@@ -20,7 +23,11 @@
         <th scope="row">{{$product->id}}</th>
         <td>{{$product->title}}</td>
         <td>{{$product->price}}</td>
-        <td>{{ $product->category ? $product->category->name : 'N/A' }}</td>
+        <td>{{$product->description}}</td>
+        <td>{{$product->sku}}</td>
+        <td>{{$product->category ? $product->category->name : 'N/A' }}</td>
+        <td><image src="{{ asset('/storage/images/products/'.$product->image)}}"  style="width: 50px; height: 50px;" /></td>
+
         <td style="display: flex">
             <div>
             <a href="{{ url('/edit-product/'.$product->id) }}" class="btn btn-primary">Edit</a>
