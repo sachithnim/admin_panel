@@ -10,9 +10,21 @@ use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(5);
+        $query = Category::query();
+
+        // If there's a search term, filter by name or description
+        if ($request->has('search') && $request->search != '') {
+            $searchTerm = $request->search;
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'like', '%' . $searchTerm . '%')
+                      ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        $categories = $query->paginate(5); // Paginate the results
+
         return view('categories.index', compact('categories'));
     }
 

@@ -4,6 +4,18 @@
     <div class="container">
     <h3 class="mb-4 mt-4 font-extrabold">List of categories</h3>
     <a class="btn btn-info float-end mb-4" href="{{ url('/add-category') }}"> Add Category</a>
+
+
+    <!-- Search Form -->
+    <form method="GET" action="{{ url('/category') }}" class="mb-4">
+        <div class="input-group">
+            <input type="text" class="form-control" name="search" placeholder="Search categories..." value="{{ request()->input('search') }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location='{{ url('/category') }}'">Clear Filters</button>
+        </div>
+    </form>
+
+    
     <table class="table">
     <thead class="table-dark">
         <tr>

@@ -12,11 +12,33 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
-    {
-        $products = Product::with('category')->paginate(5);
-        return view('dashboard', compact('products'));
+    public function index(Request $request)
+{
+    $query = Product::with('category');
+
+    // If there's a search term, filter by title, description, or SKU
+    if ($request->has('search') && $request->search != '') {
+        $searchTerm = $request->search;
+        $query->where(function ($query) use ($searchTerm) {
+            $query->where('title', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('description', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('sku', 'like', '%' . $searchTerm . '%');
+        });
     }
+
+    // If a category is selected, filter by category_id
+    if ($request->has('category') && $request->category != '') {
+        $query->where('category_id', $request->category);
+    }
+
+    // Paginate results
+    $products = $query->paginate(5);
+
+    // Pass categories to the view for the dropdown
+    $categories = Category::all();
+
+    return view('dashboard', compact('products', 'categories'));
+}
 
     public function create()
     {

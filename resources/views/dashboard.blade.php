@@ -4,6 +4,27 @@
     <div class="container">
     <h3 class="mb-4 mt-4 font-extrabold">List of products</h3>
     <a class="btn btn-info float-end mb-4" href="{{ url('/add-product') }}"> Add Product</a>
+    
+    <!-- Search Form -->
+    <form method="GET" action="{{ url('/dashboard') }}" class="mb-4">
+        <div class="input-group">
+            <!-- Search Input for Title, SKU, and Description -->
+            <input type="text" class="form-control" name="search" placeholder="Search products..." value="{{ request()->input('search') }}">
+
+            <!-- Category Dropdown -->
+            <select name="category" class="form-control">
+                <option value="">Select Category</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ request()->input('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                @endforeach
+            </select>
+
+            <button class="btn btn-primary" type="submit">Search</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location='{{ url('/dashboard') }}'">Clear Filters</button>
+        </div>
+    </form>
+
+
     <table class="table">
     <thead class="table-dark">
         <tr>
