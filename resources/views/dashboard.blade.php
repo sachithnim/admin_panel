@@ -20,7 +20,6 @@
         <th scope="row">{{$product->id}}</th>
         <td>{{$product->title}}</td>
         <td>{{$product->price}}</td>
-        {{-- <td>{{$product->category->name : 'No Category' }}</td> --}}
         <td>{{ $product->category ? $product->category->name : 'N/A' }}</td>
         <td style="display: flex">
             <div>

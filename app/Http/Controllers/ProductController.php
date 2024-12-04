@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 
+use Illuminate\Support\Facades\Session;
+
+
 class ProductController extends Controller
 {
     public function index()
@@ -29,8 +32,10 @@ class ProductController extends Controller
         ],);
 
         $input = $request->all();
-
+        
         Product::create($input);
+        session()->flash('message', $input['title'] . ' product successfully saved');
+        
         return redirect('/dashboard');
     }
 
@@ -58,6 +63,7 @@ class ProductController extends Controller
         $product->category_id = $input['category_id'];
 
         $product->save();
+        session()->flash('message', $input['title'] . ' product successfully updated');
         return redirect('/dashboard');
     }
 
@@ -65,6 +71,7 @@ class ProductController extends Controller
     {
         $product = Product::find($product);
         $product->delete();
+        session()->flash('message','PRoduct successfully deleted');
         return redirect()->back();
     }
 }

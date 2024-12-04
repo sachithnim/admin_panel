@@ -8,12 +8,12 @@
       
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
-        <input type="text" name="title" class="form-control" placeholder="Title">
+        <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Title">
       </div>
 
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Price</label>
-        <input type="number" name="price" class="form-control" placeholder="Price">
+        <input type="number" name="price" value="{{ old('price') }}" class="form-control" placeholder="Price">
       </div>
       
       <div class="mb-3">

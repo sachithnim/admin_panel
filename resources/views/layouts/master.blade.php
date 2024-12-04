@@ -11,7 +11,7 @@
 
 <body>
 
-    <div class="container">
+    <div class="container mt-2">
     @if ($errors->any())
         @foreach ($errors->all() as $error)
             <div class="alert alert-danger" role="alert">
@@ -20,6 +20,15 @@
     @endforeach
     @endif
     </div>
+
+    <div class="container mt-2">
+        @if (session()->exists('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('message') }}
+                </div>
+        @endif
+    </div>
+    
     <div class="container">
         @yield('content')
     </div>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 
+use Illuminate\Support\Facades\Session;
+
 class CategoryController extends Controller
 {
     public function index()
@@ -28,6 +30,7 @@ class CategoryController extends Controller
         $input = $request->all();
 
         Category::create($input);
+        session()->flash('message', $input['name'] . ' category successfully saved');
         return redirect('/category');
     }
 
@@ -50,6 +53,7 @@ class CategoryController extends Controller
         $category->name = $input['name'];
 
         $category->save();
+        session()->flash('message', $input['name'] . ' category successfully updated');
         return redirect('/category');
     }
 
@@ -57,6 +61,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($category);
         $category->delete();
+        session()->flash('message','Category successfully deleted');
         return redirect()->back();
     }
 }
