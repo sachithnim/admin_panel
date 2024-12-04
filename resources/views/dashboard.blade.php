@@ -69,8 +69,9 @@
     {{ $products->count() }} Total Records
     </div>
 
-    <a href="{{ url('/export-products') }}" class="btn btn-success float-end mb-4">Export Products Report (Excel)</a>
-    <a href="{{ url('/export-products-pdf') }}" class="btn btn-danger float-end mb-4 me-4">Export Products Report (PDF)</a>
+    <a href="{{ url('/export-products?search=' . urlencode(request('search')) . '&category=' . request('category')) }}" class="btn btn-success float-end mb-4">Export Products Report (Excel)</a>
+    <a href="{{ url('/export-products-pdf?search=' . urlencode(request('search')) . '&category=' . request('category')) }}" class="btn btn-danger float-end mb-4 me-4">Export Products Report (PDF)</a>
+
     </div>
         
 </x-app-layout> 
