@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 <div class="container">
-<a class="btn btn-info float-end mb-4 mt-4" href="{{ url('/dashboard') }}"> Go Back</a>
-<form method="post" action="{{ url('/add-product') }}" enctype="multipart/form-data">
+<a class="btn btn-info float-end mb-4 mt-4" href="{{ route('dashboard') }}"> Go Back</a>
+<form method="post" action="{{ route('add-product') }}" enctype="multipart/form-data">
     @csrf
       <legend>Add Product</legend>
       

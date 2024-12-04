@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 <div class="container">
-<a class="btn btn-info float-end mb-4 mt-4" href="{{ url('/category') }}"> Go Back</a> 
+<a class="btn btn-info float-end mb-4 mt-4" href="{{ route('category') }}"> Go Back</a> 
 <form method="post" action="{{ url('/edit-category/'.$category->id) }}">
     @csrf
     @method('PUT')
