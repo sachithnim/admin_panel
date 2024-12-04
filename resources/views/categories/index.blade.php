@@ -51,6 +51,9 @@
     <div style="margin-left:40%">
     {{ $categories->count() }} Total Records
     </div>
+   
+    <a href="{{ url('/export-categories-excel') }}" class="btn btn-success float-end mb-4">Export Categories Report (Excel)</a>
+    <a href="{{ url('/export-categories-pdf') }}" class="btn btn-danger float-end mb-4 me-4">Export Categories Report (PDF)</a>
     </div>
         
 </x-app-layout> 

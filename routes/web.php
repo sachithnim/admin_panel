@@ -30,6 +30,10 @@ Route::middleware([
     Route::get('/edit-category/{category}', [CategoryController::class, 'edit'])->name('edit-category');
     Route::put('/edit-category/{category}', [CategoryController::class, 'update'])->name('update-category');
     Route::delete('/delete-category/{category}', [CategoryController::class, 'destroy'])->name('delete-category');
+
+    Route::get('export-categories-excel', [CategoryController::class, 'exportExcel'])->name('categories.exportExcel');
+    Route::get('export-categories-pdf', [CategoryController::class, 'exportPdf'])->name('categories.exportPdf');
+    
 });
 
 
