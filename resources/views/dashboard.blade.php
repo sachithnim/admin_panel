@@ -42,6 +42,11 @@
         @endforeach
     </tbody>
     </table>
+    
+    {{ $products->links() }}
+    <div style="margin-left:40%">
+    {{ $products->count() }} Total Records
+    </div>
     </div>
         
 </x-app-layout> 

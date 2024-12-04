@@ -35,6 +35,10 @@
         @endforeach
     </tbody>
     </table>
+    {{ $categories->links() }}
+    <div style="margin-left:40%">
+    {{ $categories->count() }} Total Records
+    </div>
     </div>
         
 </x-app-layout> 
