@@ -68,6 +68,8 @@
     <div style="margin-left:40%">
     {{ $products->count() }} Total Records
     </div>
+    <a href="{{ url('/export-products') }}" class="btn btn-success float-end mb-4">Export Products Report</a>
+    <a href="{{ url('/export-products-pdf') }}" class="btn btn-danger float-end mb-4">Export Products Report (PDF)</a>
     </div>
         
 </x-app-layout> 

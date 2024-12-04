@@ -21,6 +21,8 @@ Route::middleware([
     Route::put('/edit-product/{product}', [ProductController::class, 'update'])->name('update-product');
     Route::delete('/delete-product/{product}', [ProductController::class, 'destroy'])->name('delete-product');
 
+    Route::get('export-products', [ProductController::class, 'export'])->name('products.export');
+    Route::get('export-products-pdf', [ProductController::class, 'exportPdf'])->name('products.exportPdf');
 
     Route::get('/category', [CategoryController::class, 'index'])->name('category');
     Route::get('/add-category', [CategoryController::class, 'create'])->name('add-category');
