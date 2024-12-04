@@ -25,6 +25,7 @@ class CategoryController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
+            'description' => 'required|string|max:500',
         ]);
 
         $input = $request->all();
@@ -44,13 +45,15 @@ class CategoryController extends Controller
     {
 
         $request->validate([
-            'name' => 'required|string|max:255|unique:categories,name',
+            'name' => 'required|string|max:255|unique:categories,name,' . $category,
+            'description' => 'required|string|max:500',
         ]);
 
         $input = $request->all();
 
         $category = Category::find($category);
         $category->name = $input['name'];
+        $category->description = $input['description'];
 
         $category->save();
         session()->flash('message', $input['name'] . ' category successfully updated');

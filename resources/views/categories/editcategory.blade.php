@@ -12,6 +12,11 @@
         <input type="text" name="name" value="{{ old('name') ?? $category->name }}" class="form-control" placeholder="Enter category name">
       </div>
 
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Description</label>
+        <input type="text" name="description" value="{{ old('description') ?? $category->description }}" class="form-control" placeholder="Enter category description">
+      </div>
+
       <button type="submit" class="btn btn-primary">Submit</button>
    
   </form>

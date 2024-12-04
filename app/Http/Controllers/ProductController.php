@@ -28,7 +28,9 @@ class ProductController extends Controller
 
         $request->validate([
             'title' => 'required|string|min:3|max:50',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required|string|min:10|max:255',
+            'sku' => 'required|string|unique:products,sku',
             'category_id' => 'required|exists:categories,id',
         ]);
 
@@ -62,7 +64,9 @@ class ProductController extends Controller
 
         $request->validate([
             'title' => 'required|string|min:3|max:50',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required|string|min:10|max:255',
+            'sku' => 'required|string|unique:products,sku,' . $product, 
             'category_id' => 'required|exists:categories,id',
         ]);
 
@@ -71,6 +75,8 @@ class ProductController extends Controller
         $product = Product::find($product);
         $product->title = $input['title'];
         $product->price = $input['price'];
+        $product->description = $input['description'];
+        $product->sku = $input['sku'];
         $product->category_id = $input['category_id'];
 
         $product->save();
@@ -82,7 +88,7 @@ class ProductController extends Controller
     {
         $product = Product::find($product);
         $product->delete();
-        session()->flash('message','PRoduct successfully deleted');
+        session()->flash('message','Product successfully deleted');
         return redirect()->back();
     }
 }
