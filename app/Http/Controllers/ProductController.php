@@ -74,7 +74,7 @@ class ProductController extends Controller
 
     // Check if the image is uploaded
     if ($request->hasFile('image')) {
-        $destinationPath = 'public/images/products';
+        $destinationPath = 'images/products';
         $image = $request->file('image');
         $image_name = $image->getClientOriginalName();
         $path = $request->file('image')->storeAs($destinationPath, $image_name);
