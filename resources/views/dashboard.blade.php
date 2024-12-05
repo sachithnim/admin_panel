@@ -64,7 +64,7 @@
             <tr>
                 <th scope="row">{{$product->id}}</th>
                 <td>{{$product->title}}</td>
-                <td>{{$product->price}}</td>
+                <td>Rs. {{$product->price,2}}</td>
                 <td>{{$product->description}}</td>
                 <td>{{$product->sku}}</td>
                 <td>{{$product->category ? $product->category->name : 'N/A' }}</td>

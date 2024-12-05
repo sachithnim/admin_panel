@@ -58,7 +58,7 @@ class ProductController extends Controller
         'description' => 'required|string|min:10|max:255',
         'sku' => 'required|string|unique:products,sku',
         'category_id' => 'required|exists:categories,id',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'  // Optional image validation
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'  // Optional image validation
     ]);
 
     // Log the request data before processing
@@ -130,7 +130,7 @@ class ProductController extends Controller
         'description' => 'required|string|min:10|max:255',
         'sku' => 'required|string|unique:products,sku,' . $product, 
         'category_id' => 'required|exists:categories,id',
-        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Validate the image if provided
+        'image' => 'required|image|mimes:jpg,jpeg,png|max:2048', // Validate the image if provided
     ]);
     Log::info("Validation passed for product ID: $product");
     

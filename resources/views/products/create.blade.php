@@ -40,7 +40,7 @@
 
                   <div class="col-md-6">
                     <label for="price" class="form-label fw-bold">Price</label>
-                    <input type="text" name="price" value="{{ old('price') }}" class="form-control shadow-lg" placeholder="Enter price" id="price">
+                    <input type="text" name="price" value="{{ old('price') }}" class="form-control shadow-lg" placeholder="Enter price" id="price" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
                     <div class="form-text">Provide the price of the product in LKR.</div>
                 </div>
               </div>
