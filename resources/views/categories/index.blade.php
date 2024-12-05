@@ -16,37 +16,36 @@
     </form>
 
     
-    <table class="table">
-    <thead class="table-dark">
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Date Created</th>
-        <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($categories as $category)
-        <tr>
-        <th scope="row">{{$category->id}}</th>
-        <td>{{$category->name}}</td>
-        <td>{{$category->description}}</td>
-        <td>{{$category->created_at->diffForHumans()}}</td>
-        <td style="display: flex">
-        <div>
-        <a href="{{ url('/edit-category/'.$category->id) }}" class="btn btn-primary">Edit</a>
-        </div>
-        <form action="{{ url('/delete-category/'.$category->id) }}" method="post">
-            {{ method_field('DELETE') }}
-            {{ csrf_field() }}
-                <button class="btn btn-danger" type="submit">Delete</button>
-            </form> 
-        </td>
-        </tr>
-        @endforeach
-    </tbody>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($categories as $category)
+            <tr>
+                <th scope="row">{{$category->id}}</th>
+                <td>{{$category->name}}</td>
+                <td>{{$category->description}}</td>
+                <td>{{$category->created_at->diffForHumans()}}</td>
+                <td>
+                    <a href="{{ url('/edit-category/'.$category->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <form action="{{ url('/delete-category/'.$category->id) }}" method="post" style="display:inline;">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
     </table>
+    
     {{ $categories->links() }}
     <div style="margin-left:40%">
     {{ $categories->count() }} Total Records

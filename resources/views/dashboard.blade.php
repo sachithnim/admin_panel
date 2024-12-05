@@ -25,43 +25,42 @@
     </form>
 
 
-    <table class="table">
-    <thead class="table-dark">
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">Title</th>
-        <th scope="col">Price</th>
-        <th scope="col">Description</th>
-        <th scope="col">SKU</th>
-        <th scope="col">Category</th>
-        <th scope="col">Image</th>
-        <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($products as $product)
-        <tr>
-        <th scope="row">{{$product->id}}</th>
-        <td>{{$product->title}}</td>
-        <td>{{$product->price}}</td>
-        <td>{{$product->description}}</td>
-        <td>{{$product->sku}}</td>
-        <td>{{$product->category ? $product->category->name : 'N/A' }}</td>
-        <td><image src="{{ asset('/storage/images/products/'.$product->image)}}"  style="width: 50px; height: 50px;" /></td>
-
-        <td style="display: flex">
-            <div>
-            <a href="{{ url('/edit-product/'.$product->id) }}" class="btn btn-primary">Edit</a>
-            </div>
-            <form action="{{ url('/delete-product/'.$product->id) }}" method="post">
-            {{ method_field('DELETE') }}
-            {{ csrf_field() }}
-                <button class="btn btn-danger" type="submit">Delete</button>
-            </form> 
-        </td>       
-        </tr>
-        @endforeach
-    </tbody>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Price</th>
+                <th scope="col">Description</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Category</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($products as $product)
+            <tr>
+                <th scope="row">{{$product->id}}</th>
+                <td>{{$product->title}}</td>
+                <td>{{$product->price}}</td>
+                <td>{{$product->description}}</td>
+                <td>{{$product->sku}}</td>
+                <td>{{$product->category ? $product->category->name : 'N/A' }}</td>
+                <td>
+                    <img src="{{ asset('/storage/images/products/'.$product->image)}}" alt="{{$product->title}}" class="img-fluid" style="width: 50px; height: 50px; object-fit: cover;">
+                </td>
+                <td>
+                    <a href="{{ url('/edit-product/'.$product->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <form action="{{ url('/delete-product/'.$product->id) }}" method="post" style="display:inline;">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
     </table>
     
     {{ $products->links() }}
