@@ -18,7 +18,7 @@
 
                 <!-- Logo Section Centered -->
                 <div class="flex justify-center mb-8">
-                    <x-authentication-card-logo />
+                    <img src="{{ asset('images/logo_black.png') }}" alt="Logo" class="img-fluid" style="width: 250px; height: auto;">
                 </div>
 
                 <x-validation-errors class="mb-4" />
