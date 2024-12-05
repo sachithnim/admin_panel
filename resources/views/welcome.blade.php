@@ -16,7 +16,7 @@
     <header class="bg-dark text-white py-3">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 150px;">
+                <img src="{{ asset('images/logo_white.png') }}" alt="Logo" class="img-fluid" style="width: 100px; height: auto;">
             </div>
             @if (Route::has('login'))
             <nav>
@@ -45,34 +45,41 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Our Key Features</h2>
-            <div class="row text-center">
-                <div class="col-md-4 mb-4">
-                    <div class="feature-card p-4 border shadow-sm rounded hover-shadow">
-                        <i class="fas fa-cogs fa-3x mb-3"></i>
-                        <h3>Feature One</h3>
-                        <p>Feature description goes here. Improve user experience with dynamic content and more features.</p>
-                    </div>
+   <!-- Features Section -->
+<section class="features py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Key Features of StockFlow Inventory Management</h2>
+        <div class="row text-center">
+            <!-- Feature One: Real-Time Stock Tracking -->
+            <div class="col-md-4 mb-4">
+                <div class="feature-card p-4 border shadow-sm rounded hover-shadow">
+                    <i class="fas fa-cogs fa-3x mb-3"></i>
+                    <h3>Real-Time Stock Tracking</h3>
+                    <p>Track inventory in real-time with automatic updates. Monitor stock levels, receive alerts for low stock, and streamline your supply chain. Using Reports analyze data</p>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="feature-card p-4 border shadow-sm rounded hover-shadow">
-                        <i class="fas fa-users fa-3x mb-3"></i>
-                        <h3>Feature Two</h3>
-                        <p>Feature description goes here. User-friendly interfaces and top-notch performance guaranteed.</p>
-                    </div>
+            </div>
+
+            <!-- Feature Two: Barcode Scanning Integration -->
+            <div class="col-md-4 mb-4">
+                <div class="feature-card p-4 border shadow-sm rounded hover-shadow">
+                    <i class="fas fa-users fa-3x mb-3"></i>
+                    <h3>Barcode Scanning Integration</h3>
+                    <p>Seamlessly integrate barcode scanning for efficient stocktaking, item entry, and management, reducing manual errors and improving speed.</p>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="feature-card p-4 border shadow-sm rounded hover-shadow">
-                        <i class="fas fa-chart-line fa-3x mb-3"></i>
-                        <h3>Feature Three</h3>
-                        <p>Feature description goes here. Boost productivity and efficiency through advanced solutions.</p>
-                    </div>
+            </div>
+
+            <!-- Feature Three: Advanced Reporting & Analytics -->
+            <div class="col-md-4 mb-4">
+                <div class="feature-card p-4 border shadow-sm rounded hover-shadow">
+                    <i class="fas fa-chart-line fa-3x mb-3"></i>
+                    <h3>Advanced Reporting & Analytics</h3>
+                    <p>Generate insightful reports and analytics to track sales trends, monitor stock levels, and make data-driven decisions for better management.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Call to Action Section -->
     <section class="cta-section text-center bg-primary text-white py-5">
@@ -114,7 +121,7 @@
     <footer class="bg-dark text-white py-3">
         <div class="container d-flex justify-content-between">
             <div class="footer-left">
-                <p>&copy; 2024 Company Name. All rights reserved.</p>
+                <p>&copy; 2024 StockFlow. All rights reserved.</p>
             </div>
             <div class="footer-right">
                 <ul class="nav">
