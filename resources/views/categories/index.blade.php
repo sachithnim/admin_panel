@@ -19,7 +19,7 @@
     <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">Category ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Date Created</th>

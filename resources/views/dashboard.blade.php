@@ -28,7 +28,7 @@
     <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">Product ID</th>
                 <th scope="col">Title</th>
                 <th scope="col">Price</th>
                 <th scope="col">Description</th>
