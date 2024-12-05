@@ -5,6 +5,25 @@
         <i class="bi bi-arrow-left-circle me-2"></i> Go Back
     </a>
 
+
+    <div class="container mt-2">
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger" role="alert">
+                    {{ $error }}
+                </div>
+        @endforeach
+        @endif
+        </div>
+    
+        <div class="container mt-2">
+            @if (session()->exists('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('message') }}
+                    </div>
+            @endif
+        </div>
+
     <div class="card shadow-lg border-0 rounded-4">
         <div class="card-header" style="background-color: #0066cc; color: white; text-align: center; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
             <h3 class="mb-0">Add New Category</h3>
