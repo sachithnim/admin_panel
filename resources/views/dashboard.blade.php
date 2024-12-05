@@ -1,7 +1,28 @@
 @extends('layouts.master')
 
+
 <x-app-layout>
     <div class="container">
+
+        <div class="container mt-2">
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger" role="alert">
+                        {{ $error }}
+                    </div>
+            @endforeach
+            @endif
+            </div>
+        
+            <div class="container mt-2">
+                @if (session()->exists('message'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('message') }}
+                        </div>
+                @endif
+            </div>
+
+
     <h3 class="mb-4 mt-4 font-extrabold">List of products</h3>
     <a class="btn btn-info float-end mb-4" href="{{ url('/add-product') }}"> Add Product</a>
     
