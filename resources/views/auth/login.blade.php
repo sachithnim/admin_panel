@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="min-h-screen bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 flex items-center justify-center">
+    <div class="min-h-screen bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700 flex items-center justify-center">
         <!-- Container for Flex layout -->
         <div class="flex w-full max-w-screen-xl rounded-lg shadow-lg">
 
