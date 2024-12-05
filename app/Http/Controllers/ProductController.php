@@ -8,7 +8,7 @@ use App\Models\Category;
 use App\Exports\ProductsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,33 +49,67 @@ class ProductController extends Controller
         return view('products.create', compact('categories'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+{
+    // Validate the request
+    $request->validate([
+        'title' => 'required|string|min:3|max:50',
+        'price' => 'required|numeric|min:0',
+        'description' => 'required|string|min:10|max:255',
+        'sku' => 'required|string|unique:products,sku',
+        'category_id' => 'required|exists:categories,id',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'  // Optional image validation
+    ]);
 
-        $request->validate([
-            'title' => 'required|string|min:3|max:50',
-            'price' => 'required|numeric|min:0',
-            'description' => 'required|string|min:10|max:255',
-            'sku' => 'required|string|unique:products,sku',
-            'category_id' => 'required|exists:categories,id',
+    // Log the request data before processing
+    Log::info('Received request to add product', [
+        'title' => $request->input('title'),
+        'price' => $request->input('price'),
+        'sku' => $request->input('sku'),
+        'category_id' => $request->input('category_id'),
+        'has_image' => $request->hasFile('image')
+    ]);
+
+    $input = $request->all();
+
+    // Check if the image is uploaded
+    if ($request->hasFile('image')) {
+        $destinationPath = 'public/images/products';
+        $image = $request->file('image');
+        $image_name = $image->getClientOriginalName();
+        $path = $request->file('image')->storeAs($destinationPath, $image_name);
+
+        $input['image'] = $image_name;
+
+        // Log image upload success
+        Log::info('Image uploaded successfully', [
+            'image_name' => $image_name,
+            'path' => $path
         ]);
+    } else {
+        $input['image'] = null;  // Set image to null if no file is uploaded
 
-        $input = $request->all();
-        if ($request->hasFile('image'))
-        {
-            $destinationPath = 'public/images/products';
-            $image = $request->file('image');
-            $image_name = $image->getClientOriginalName();
-            $path = $request->file('image')->storeAs($destinationPath, $image_name);
-
-            $input['image'] = $image_name;
-
-        }
-        
-        Product::create($input);
-        session()->flash('message', $input['title'] . ' product successfully saved');
-        
-        return redirect('/dashboard');
+        // Log the absence of an image
+        Log::info('No image uploaded for product', [
+            'title' => $input['title']
+        ]);
     }
+
+    // Create the product in the database
+    Product::create($input);
+
+    // Log product creation success
+    Log::info('Product successfully created', [
+        'title' => $input['title'],
+        'sku' => $input['sku'],
+        'category_id' => $input['category_id']
+    ]);
+
+    // Flash a message and redirect
+    session()->flash('message', $input['title'] . ' product successfully saved');
+    
+    return redirect('/dashboard');
+}
 
     public function edit($product)
     {
@@ -85,29 +119,78 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, $product)
-    {
-
-        $request->validate([
-            'title' => 'required|string|min:3|max:50',
-            'price' => 'required|numeric|min:0',
-            'description' => 'required|string|min:10|max:255',
-            'sku' => 'required|string|unique:products,sku,' . $product, 
-            'category_id' => 'required|exists:categories,id',
-        ]);
-
-        $input = $request->all();
-
-        $product = Product::find($product);
-        $product->title = $input['title'];
-        $product->price = $input['price'];
-        $product->description = $input['description'];
-        $product->sku = $input['sku'];
-        $product->category_id = $input['category_id'];
-
-        $product->save();
-        session()->flash('message', $input['title'] . ' product successfully updated');
-        return redirect('/dashboard');
+{
+    // Log the start of the update process
+    Log::info("Updating product with ID: $product");
+    
+    // Validate the input fields
+    $request->validate([
+        'title' => 'required|string|min:3|max:50',
+        'price' => 'required|numeric|min:0',
+        'description' => 'required|string|min:10|max:255',
+        'sku' => 'required|string|unique:products,sku,' . $product, 
+        'category_id' => 'required|exists:categories,id',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Validate the image if provided
+    ]);
+    Log::info("Validation passed for product ID: $product");
+    
+    // Get the input data
+    $input = $request->all();
+    
+    // Find the product
+    $product = Product::find($product);
+    
+    if (!$product) {
+        Log::error("Product with ID $product not found");
+        return redirect('/dashboard')->withErrors('Product not found!');
     }
+    
+    Log::info("Product found: $product->title");
+    
+    // Update the product details
+    $product->title = $input['title'];
+    $product->price = $input['price'];
+    $product->description = $input['description'];
+    $product->sku = $input['sku'];
+    $product->category_id = $input['category_id'];
+    Log::info("Product details updated for: $product->title");
+    
+    // Check if a new image is uploaded
+    if ($request->hasFile('image')) {
+        // Log image upload
+        Log::info("New image uploaded for product ID: $product->id");
+
+        // Delete the old image if it exists
+        if ($product->image && file_exists(storage_path('images/products/' . $product->image))) {
+            // Delete the old image from the public directory
+            unlink(storage_path('images/products/' . $product->image));
+            Log::info("Old image deleted for product ID: $product->id");
+        }
+
+        // Store the new image
+        $image = $request->file('image');
+        $image_name = time() . '_' . $image->getClientOriginalName();  // Generate a unique name for the image
+        $path = $image->storeAs('images/products', $image_name);  // Save the image to the public disk
+        
+        // Update the image field in the database
+        $product->image = $image_name;
+        Log::info("Image updated for product ID: $product->id, new image name:  $path ,$image_name");
+    }
+
+    // Save the updated product
+    $product->save();
+    
+    // Log the success
+    Log::info("Product ID: $product->id successfully updated");
+    
+    // Flash a success message
+    session()->flash('message', $input['title'] . ' product successfully updated');
+    
+    // Redirect back to the dashboard
+    return redirect('/dashboard');
+}
+
+    
 
     public function destroy($product)
     {

@@ -10,7 +10,7 @@
             <h3 class="mb-0">Edit Product</h3>
         </div>
         <div class="card-body p-5">
-            <form method="post" action="{{ url('/edit-product/'.$product->id) }}" enctype="multipart/form-data" id="product-form">
+            <form method="post" action="{{ route('edit-product', $product->id) }}" enctype="multipart/form-data" id="product-form">
                 @csrf
                 @method('PUT')
 
@@ -64,6 +64,19 @@
                         <div class="form-text">Upload a high-quality image (JPG, PNG, or JPEG).</div>
                     </div>
                 </div>
+
+                <!-- Existing Image Display -->
+                @if ($product->image)
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold">Current Image</label>
+                            <div>
+                                <img src="{{ asset('storage/images/products/'.$product->image) }}" alt="Current Product Image" class="img-fluid" style="max-width: 200px;">
+                            </div>
+                            <small class="text-muted">Leave this field blank if you don't want to update the image.</small>
+                        </div>
+                    </div>
+                @endif
 
                 <!-- Image Preview -->
                 <div id="image-preview" class="mt-4 d-none">
